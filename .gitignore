@@ -7,7 +7,7 @@ __pycache__/
 *.pyd
 
 # Virtual environment
-myenv/
+*env/
 
 # IDE-specific files (if you're using VS Code)
 .vscode/
