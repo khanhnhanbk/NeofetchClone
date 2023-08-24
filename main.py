@@ -6,6 +6,7 @@ from cpu_info import get_cpu_info, parse_cpu_info
 from ram_info import get_ram_info
 from disk_info import get_disk_info
 from software_info import get_installed_software
+from device_info import get_connected_mouse_devices
 
 cpu_info = get_cpu_info()
 cpu_model, cpu_cores = parse_cpu_info(cpu_info)
@@ -84,3 +85,8 @@ software_table_str = tabulate(
 
 print("\nInstalled Software:")
 print(software_table_str)
+
+# Print the list of connected mouse devices
+mouse_devices = get_connected_mouse_devices()
+print("\nConnected Mouse Devices:")
+print(mouse_devices)

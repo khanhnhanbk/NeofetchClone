@@ -1,8 +1,8 @@
 import win32com.client
-import json
+import platform
 
 
-def get_connected_mouse_devices():
+def get_connected_mouse_devices_window():
     mouse_devices = []
     wmi = win32com.client.GetObject("winmgmts:")
     list_devices = wmi.InstancesOf("Win32_PnPEntity")
@@ -24,7 +24,14 @@ def get_connected_mouse_devices():
     return mouse_devices
 
 
-connected_mouse_devices = get_connected_mouse_devices()
+def get_connected_mouse_devices_linux():
+    pass
 
-# Print list_devices as JSON
-print(json.dumps(connected_mouse_devices, indent=4))
+
+def get_connected_mouse_devices():
+    if platform.system() == "Linux":
+        return get_connected_mouse_devices_linux()
+    elif platform.system() == "Windows":
+        return get_connected_mouse_devices_window()
+    else:
+        return []
