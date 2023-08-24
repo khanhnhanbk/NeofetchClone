@@ -14,7 +14,7 @@ myenv/
 
 # Generated tables or output files (if any)
 # Example:
-# output_table.txt
+output.*
 
 # Other environment-specific files (if any)
 # Example:

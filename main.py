@@ -5,6 +5,7 @@ from tabulate import tabulate
 from cpu_info import get_cpu_info, parse_cpu_info
 from ram_info import get_ram_info
 from disk_info import get_disk_info
+from software_info import get_installed_software
 
 cpu_info = get_cpu_info()
 cpu_model, cpu_cores = parse_cpu_info(cpu_info)
@@ -59,3 +60,27 @@ print("System Information:")
 print(system_info_table)
 print("\nDisk Information:")
 print(disk_table_str)
+
+# Print the list of installed software
+software_list = get_installed_software()
+
+software_table = []
+for software in software_list:
+    software_table.append(
+        [
+            software["Package"],
+            software["Version"],
+        ]
+    )
+
+software_table_str = tabulate(
+    software_table,
+    headers=[
+        "Package",
+        "Version",
+    ],
+    tablefmt="pretty",
+)
+
+print("\nInstalled Software:")
+print(software_table_str)
