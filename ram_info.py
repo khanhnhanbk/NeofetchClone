@@ -1,7 +1,6 @@
 import psutil
 
 
-# Gather RAM information using psutil library
 def get_ram_info():
     ram = psutil.virtual_memory()
     ram_info = {
