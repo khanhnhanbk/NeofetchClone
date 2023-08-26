@@ -14,7 +14,8 @@ __pycache__/
 
 # Generated tables or output files (if any)
 # Example:
-output.*
+output*
+test*
 
 # Other environment-specific files (if any)
 # Example:
