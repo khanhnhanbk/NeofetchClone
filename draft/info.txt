@@ -1,0 +1,57 @@
+
+Host Name:                 DESKTOP-15BJ1AO
+OS Name:                   Microsoft Windows 10 Home Single Language
+OS Version:                10.0.19044 N/A Build 19044
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Workstation
+OS Build Type:             Multiprocessor Free
+Registered Owner:          nhannguyenqna2002@gmail.com
+Registered Organization:   
+Product ID:                00327-35891-34127-AAOEM
+Original Install Date:     8/26/2023, 7:41:48 PM
+System Boot Time:          9/2/2023, 3:03:21 PM
+System Manufacturer:       Dell Inc.
+System Model:              Vostro 3490
+System Type:               x64-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: Intel64 Family 6 Model 142 Stepping 12 GenuineIntel ~1609 Mhz
+BIOS Version:              Dell Inc. 1.24.0, 6/12/2023
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume3
+System Locale:             en-us;English (United States)
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC+07:00) Bangkok, Hanoi, Jakarta
+Total Physical Memory:     16,232 MB
+Available Physical Memory: 11,839 MB
+Virtual Memory: Max Size:  19,176 MB
+Virtual Memory: Available: 14,884 MB
+Virtual Memory: In Use:    4,292 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    WORKGROUP
+Logon Server:              \\DESKTOP-15BJ1AO
+Hotfix(s):                 7 Hotfix(s) Installed.
+                           [01]: KB5027122
+                           [02]: KB5003791
+                           [03]: KB5020683
+                           [04]: KB5026037
+                           [05]: KB5027215
+                           [06]: KB5026879
+                           [07]: KB5005699
+Network Card(s):           2 NIC(s) Installed.
+                           [01]: Realtek PCIe GbE Family Controller
+                                 Connection Name: Ethernet
+                                 Status:          Media disconnected
+                           [02]: Qualcomm QCA9377 802.11ac Wireless Adapter
+                                 Connection Name: Wi-Fi
+                                 DHCP Enabled:    Yes
+                                 DHCP Server:     192.168.1.1
+                                 IP address(es)
+                                 [01]: 192.168.1.17
+                                 [02]: fe80::28bd:2d:fab0:b979
+                                 [03]: 2405:4802:9045:4ed0:1875:299a:dce3:54ea
+                                 [04]: 2405:4802:9045:4ed0:606d:f49b:94af:593a
+Hyper-V Requirements:      VM Monitor Mode Extensions: Yes
+                           Virtualization Enabled In Firmware: Yes
+                           Second Level Address Translation: Yes
+                           Data Execution Prevention Available: Yes

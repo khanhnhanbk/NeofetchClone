@@ -1,49 +1,69 @@
-import platform
-import subprocess
+import os
+import winreg
+import csv
 
-def get_installed_software_linux():
-    try:
-        dpkg_output = subprocess.check_output(["dpkg", "--list"], text=True)
-        dpkg_lines = dpkg_output.strip().split("\n")[5:]  # Skip header lines
-        software_list = []
+# Define an array of Registry keys to query
+keys = [
+    r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+    r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall",
+    r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+]
 
-        for line in dpkg_lines:
-            columns = line.split()
-            if len(columns) >= 3:
-                package_info = {
-                    "Package": columns[1],
-                    "Version": columns[2],
-                }
-                software_list.append(package_info)
+# Set the output file path as a CSV file
+output_file = "./output.csv"
 
-        return software_list
-    except subprocess.CalledProcessError:
-        return []
+# Create or clear the output CSV file
+with open(output_file, "w", newline="") as file:
+    csv_writer = csv.writer(file)
 
-def get_installed_software_windows():
-    try:
-        powershell_command = "Get-WmiObject -Class Win32_Product | Select-Object Name, Version"
-        powershell_output = subprocess.check_output(["powershell", "-Command", powershell_command], text=True)
-        powershell_lines = powershell_output.strip().split("\n")
-        software_list = []
+    # Write the header row to the CSV file
+    csv_writer.writerow(
+        ["DisplayName", "DisplayVersion", "Publisher", "InstallDate", "License"]
+    )
 
-        for line in powershell_lines[2:]:  # Skip header lines
-            columns = line.split()
-            if len(columns) >= 2:
-                package_info = {
-                    "Package": columns[0],
-                    "Version": columns[1],
-                }
-                software_list.append(package_info)
+    # Function to retrieve the value of a specific Registry entry if it exists
+    def get_reg_value(key, value_name):
+        try:
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key) as reg_key:
+                value, _ = winreg.QueryValueEx(reg_key, value_name)
+                return value
+        except FileNotFoundError:
+            return None
 
-        return software_list
-    except subprocess.CalledProcessError:
-        return []
+    # Loop through the Registry keys and append results to the CSV file
+    for key in keys:
+        try:
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key) as main_key:
+                subkey_index = 0
+                while True:
+                    try:
+                        subkey_name = winreg.EnumKey(main_key, subkey_index)
+                        subkey_path = os.path.join(key, subkey_name)
 
-def get_installed_software():
-    if platform.system() == "Linux":
-        return get_installed_software_linux()
-    elif platform.system() == "Windows":
-        return get_installed_software_windows()
-    else:
-        return []
+                        display_name = get_reg_value(subkey_path, "DisplayName")
+                        display_version = get_reg_value(subkey_path, "DisplayVersion")
+                        publisher = get_reg_value(subkey_path, "Publisher")
+                        install_date = get_reg_value(subkey_path, "InstallDate")
+                        license = get_reg_value(subkey_path, "License")
+
+                        # Check if the required values exist and write them to the CSV file
+                        if display_name and display_version and publisher:
+                            csv_writer.writerow(
+                                [
+                                    display_name,
+                                    display_version,
+                                    publisher,
+                                    install_date,
+                                    license,
+                                ]
+                            )
+
+                        subkey_index += 1
+                    except OSError:
+                        break
+        except FileNotFoundError:
+            pass  # Ignore keys that don't exist
+
+print(
+    "Registry information has been extracted and saved to 'output.csv' with additional information."
+)
