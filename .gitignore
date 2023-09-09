@@ -11,11 +11,11 @@ __pycache__/
 
 # IDE-specific files (if you're using VS Code)
 .vscode/
-
+# Draft
+draft/
 # Generated tables or output files (if any)
 # Example:
 output*
-test*
 
 # Other environment-specific files (if any)
 # Example:
